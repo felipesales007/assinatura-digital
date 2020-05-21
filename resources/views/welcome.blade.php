@@ -3,98 +3,88 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Assinatura Digital</title>
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <!-- css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
+    <style>
+        #cover {
+            display: flex;
+            position: relative;
+            height: 100%;
+            background: #222 url('https://unsplash.it/1080/720/?random') center center no-repeat;
+            background-size: cover;
+            align-items: center;
+        }
+
+        #cover-caption {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        form:before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            z-index: -1;
+        }
+    </style>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+        <!-- corpo -->
+        <section id="cover" class="min-vh-100">
+            <div id="cover-caption">
+                <!-- conteúdo -->
+                <div class="container">
+                    <div class="row text-white">
+                        <!-- responsividade -->
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4">
+                            <!-- título -->
+                            <h3 class="py-2 text-truncate">Assinar documento</h3>
+                            <div class="px-2">
+                                <!-- formulário -->
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    @if (session('status'))
+                                        <!-- alerta de erro -->
+                                        <div class="alert alert-danger" role="alert">{{ session('status') }}</div>
+                                    @endif
+                                    <!-- arquivo -->
+                                    <div class="form-group">
+                                        <label for="file">Arquivo</label>
+                                        <div class="custom-file">
+                                            <input type="file" id="file" name="file" class="custom-file-input" required accept=".pfx">
+                                            <label class="custom-file-label" for="file" data-browse="Selecionar">Certificado .pfx</label>
+                                        </div>
+                                        <small class="form-text text-white">Arquivo no formato/extensão .pfx</small>
+                                    </div>
+                                    <!-- senha -->
+                                    <div class="form-group">
+                                        <label for="password">Senha</label>
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="Senha" required>
+                                    </div>
+                                    <!-- botão -->
+                                    <button type="submit" class="btn btn-primary btn-lg mt-3">Gerar assinatura</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- js -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script>
+            $('input[type="file"]').change(function(e) {
+                $('.custom-file-label').html(e.target.files[0].name);
+            });
+        </script>
     </body>
 </html>
