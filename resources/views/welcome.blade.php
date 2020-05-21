@@ -49,7 +49,7 @@
                             <h3 class="py-2 text-truncate">Assinar documento</h3>
                             <div class="px-2">
                                 <!-- formulário -->
-                                <form action="" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('pdf') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @if (session('status'))
                                         <!-- alerta de erro -->

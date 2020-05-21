@@ -11,6 +11,10 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('pdf',  ['as' => 'pdf', 'uses' => 'PDFController@createPDF']);
