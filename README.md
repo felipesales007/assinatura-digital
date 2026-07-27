@@ -4,9 +4,9 @@
 
 Simples projeto para realizar assinaturas digitais em documentos PDF.
 
-Desenvolvido no **framework Laravel** por Felipe Sales.
+Desenvolvido no **framework Laravel** por Felipe Santos.
 
-Conheça o framework [Laravel](https://laravel.com) e [Felipe Sales](https://www.felipesales.com.br).
+Conheça o framework [Laravel](https://laravel.com) e [Felipe Santos](https://www.felipess.com).
 
 ## Versão disponível
 
